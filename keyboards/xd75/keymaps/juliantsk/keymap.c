@@ -16,8 +16,9 @@
 #include QMK_KEYBOARD_H
 
 // Layer shorthand
-#define _QW 0
-#define _FN 1
+#define _CO 0
+#define _SS 1
+#define _FN 2
 
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
@@ -27,7 +28,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* QWERTY
+/* COLEMAK
  * .--------------------------------------------------------------------------------------------------------------------------------------.
  * | Q      | W      | F      | P      | G      | NUM LK | P7     | P8     | P9     | PAUSE  | J      | L      | U      | Y      | ;      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
@@ -41,30 +42,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
-  [_QW] = LAYOUT_ortho_5x15( /* COLEMAK */
-    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,     KC_NLCK, KC_P7,   KC_P8,   KC_P9,   KC_MPLY,   KC_J,       KC_L,      KC_U,    KC_Y,    KC_SCLN,
-    KC_A,    KC_R,    KC_S,    KC_T,    KC_D,     KC_PSCR, KC_P4,   KC_P5,   KC_P6,   KC_SLCK,   KC_H,       KC_N,      KC_E,    KC_I,    KC_O,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_INS,  KC_P1,   KC_P2,   KC_P3,   KC_HOME,   KC_K,       KC_M,      KC_COMM, KC_DOT,  KC_SLSH,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_PLUS, KC_VOLUP, KC_DEL,  KC_NO,   KC_P0,   KC_PDOT, KC_END,    KC_VOLDOWN, KC_PGUP,   KC_RALT, KC_UP,   KC_RCTRL,
-    KC_PAST, KC_NO,   KC_NO,   KC_MINS, KC_SPC,   KC_LSFT, MO(_FN), KC_ESC,  MO(_FN), KC_RSFT,   KC_SPC,     KC_PGDOWN, KC_LEFT, KC_DOWN, KC_RIGHT
+  [_CO] = LAYOUT_ortho_5x15( /* COLEMAK */
+    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,     KC_NLCK, KC_P7,   KC_P8,   KC_P9,   KC_MPLY, KC_J,       KC_L,      KC_U,    KC_Y,    KC_SCLN,
+    KC_A,    KC_R,    KC_S,    KC_T,    KC_D,     KC_PSCR, KC_P4,   KC_P5,   KC_P6,   KC_SLCK, KC_H,       KC_N,      KC_E,    KC_I,    KC_O,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_INS,  KC_P1,   KC_P2,   KC_P3,   KC_HOME, KC_K,       KC_M,      KC_COMM, KC_DOT,  KC_SLSH,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_PLUS, KC_VOLUP, KC_DEL,  KC_NO,   KC_P0,   KC_PDOT, KC_END,  KC_VOLDOWN, KC_PGUP,   KC_RALT, KC_UP,   KC_RCTRL,
+    KC_PAST, KC_NO,   KC_NO,   KC_MINS, KC_SPC,   KC_LSFT, MO(_SS), KC_ESC,  MO(_SS), KC_RSFT, KC_SPC,     KC_PGDOWN, KC_LEFT, KC_DOWN, KC_RIGHT
   ),
 
-/* FUNCTION
+/* SECONDARY & SYMBOL
  * .--------------------------------------------------------------------------------------------------------------------------------------.
  * | 1      | 2      | 3      | 4      | 5      |        |        |        |        |        | 6      | 7      | 8      | 9      | 0      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | SELECT | CALC   | MYCOMP | MAIL   | RGB HD | RGB HI | P7     | P8     | P9     | -      |        |        | PR SCR | SCR LK | PAUSE  |
+ * | A      | R      | S      | T      | D      | PRINT  | P4     | P5     | P6     | SCROLL | H      | N      | E      | I      | O      |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
+ * | Z      | X      | C      | V      | B      | INSERT | P1     | P2     | P3     | HOME   | K      | M      | ,      | .      | /      |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
+ * | LCTRL  | SUPER  | LALT   | +      | VOLUP  | DELETE | PN     | P0     | P.     | END    | VOLDN  | PGUP   | RALT   | UP     | RCTRL  |
+ * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
+ * | P*     | NO     | NO     | -      | SPACE  | SHIFT  | FN     | ESC    | FN     | SHIFT  | SPACE  | PGDN   | LEFT   | DOWN   | RIGHT  |
+ * '--------------------------------------------------------------------------------------------------------------------------------------'
+ */
+
+  [_SL] = LAYOUT_ortho_5x15( /* SECONDARY & SYMBOL */
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, ______,  _______, _______,  _____,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+    KC_MSEL, KC_CALC, KC_MYCM, KC_MAIL, RGB_HUD, RGB_HUI, KC_P7,   KC_P8,   KC_P9,   KC_MINS, _______, _______, KC_PSCR, KC_SLCK, KC_PAUS,
+    KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, RGB_SAD, RGB_SAI, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, _______, RESET,   _______, _______, _______,
+    KC_VOLD, KC_MUTE, KC_VOLU, KC_APP,  RGB_VAD, RGB_VAI, KC_P1,   KC_P2,   KC_P3,   KC_PENT, _______, _______, _______, _______, _______,
+    _______, _______, RGB_TOG, _______, RGB_RMOD,RGB_MOD, MO(_SS), _______, MO(_SS), KC_PENT, KC_PENT, MO(_FN), _______, _______, _______
+  )
+};
+
+/* FUNCTION
+ * .--------------------------------------------------------------------------------------------------------------------------------------.
+ * | F9     | F10    | F11    | F12    |        |        |        |        |        |        | 6      | 7      | 8      | 9      | RESET  |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | PREV   | PLAY   | NEXT   | STOP   | RGB SD | RGB SI | P4     | P5     | P6     | +      |        | RESET  |        |        |        |
+ * | F5     | F6     | F7     | F8     | RGB HD | RGB HI | P7     | P8     | P9     | -      |        |        |        |        |        |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | VOL-   | MUTE   | VOL+   | APP    | RGB VD | RGB VI | P1     | P2     | P3     | PENT   |        |        |        |        |        |
+ * | F1     | F2     | F3     | F4     | RGB SD | RGB SI | P4     | P5     | P6     | +      |        |        |        |        |        |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        | RGB TG | FN     | RGB RMD| RGB MD | P0     |        | P.     | PENT   | PENT   | FN     |        |        |        |
+ * | LCTRL  | SUPER  | LALT   | +      | VOLUP  | DELETE | PN     | P0     | P.     | END    | VOLDN  | PGUP   | RALT   | UP     | RCTRL  |
+ * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
+ * | P*     | NO     | NO     | -      | SPACE  | SHIFT  | FN     | ESC    | FN     | SHIFT  | SPACE  | PGDN   | LEFT   | DOWN   | RIGHT  |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
   [_FN] = LAYOUT_ortho_5x15( /* FUNCTION */
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, ______,  _______, _______,  _____,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, ______,  _______, _______,  _____,   KC_6,    KC_7,    KC_8,    KC_9,    RESET,
     KC_MSEL, KC_CALC, KC_MYCM, KC_MAIL, RGB_HUD, RGB_HUI, KC_P7,   KC_P8,   KC_P9,   KC_MINS, _______, _______, KC_PSCR, KC_SLCK, KC_PAUS,
     KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, RGB_SAD, RGB_SAI, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, _______, RESET,   _______, _______, _______,
     KC_VOLD, KC_MUTE, KC_VOLU, KC_APP,  RGB_VAD, RGB_VAI, KC_P1,   KC_P2,   KC_P3,   KC_PENT, _______, _______, _______, _______, _______,
