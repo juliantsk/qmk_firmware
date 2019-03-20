@@ -70,8 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, RGB_SAD, RGB_SAI, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, _______, RESET,   _______, _______, _______,
     KC_VOLD, KC_MUTE, KC_VOLU, KC_APP,  RGB_VAD, RGB_VAI, KC_P1,   KC_P2,   KC_P3,   KC_PENT, _______, _______, _______, _______, _______,
     _______, _______, RGB_TOG, _______, RGB_RMOD,RGB_MOD, MO(_SS), _______, MO(_SS), KC_PENT, KC_PENT, MO(_FN), _______, _______, _______
-  )
-};
+  ),
 
 /* FUNCTION
  * .--------------------------------------------------------------------------------------------------------------------------------------.
