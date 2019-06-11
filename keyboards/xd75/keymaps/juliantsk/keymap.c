@@ -18,19 +18,11 @@
 // Layer shorthand
 #define _CO 0
 #define _SS 1
-#define _FN 2
+#define _NL 2
 
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
-  DBLOH = SAFE_RANGE,
-  COPY,
-  PASTE,
-  SLALL,
-  SS_FN,
-  PRNS,
-  CBRS,
-  BRCS,
-  QUOTS,
+  QUOTS = SAFE_RANGE,
   BLSL_PP,
   MINSS,
   EQLS
@@ -44,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
  * | Q      | W      | F      | P      | G      | P.     | P4     | P5     | P6     | P0     | J      | L      | U      | Y      | ;      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
- * | A      | R      | S      | T      | D      | ENTER  | P1     | P2     | P3     | HOME   | H      | N      | E      | I      | O      |
+ * | A      | R      | S      | T      | D      | ENTER  | P1     | P2     | P3     | BKSP   | H      | N      | E      | I      | O      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
  * | Z      | X      | C      | V      | B      | MINUS  | SCROLL | PAUSE  | PGUP   | PLUS   | K      | M      | ,      | .      | /      |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
@@ -53,93 +45,69 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
   [_CO] = LAYOUT_ortho_5x15( /* COLEMAK */
-    KC_SEL,  KC_W,    KC_F,    KC_P,    KC_G,    KC_MINS, KC_P7,   KC_P8,   KC_P9,   KC_EQL,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,
-    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_CAPS, KC_P4,   KC_P5,   KC_P6,   KC_MPLY, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,
-    KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_PSCR, KC_P1,   KC_P2,   KC_P3,   KC_HOME, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SLCK, KC_NO,   KC_P0,   KC_PDOT, KC_END,  KC_PGUP, KC_PGDN, KC_TAB,  KC_UP,   KC_ENT,
-    KC_NO,   KC_COPY, MO(_FN), KC_LSFT, KC_SPC,  MO(_SS), KC_ENT, KC_GESC,  KC_BSPC, MO(_SS), KC_SPC,  KC_RSFT, KC_LEFT, KC_DOWN, KC_RIGHT
+    C(KC_A), C(KC_C), C(KC_V), KC_DEL,  KC_F5,   KC_F6,   KC_P7,   KC_P8,   KC_P9,   KC_PSLS, KC_LGUI, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,
+    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_PDOT, KC_P4,   KC_P5,   KC_P6,   KC_P0,   KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,
+    KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_TAB,  KC_P1,   KC_P2,   KC_P3,   KC_ENT, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_PMNS, KC_PSCR, KC_BRK,  KC_PGUP, KC_PPLS, KC_K,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH,
+    KC_LSFT, KC_LCTRL,KC_NO,   MO(_NL), LSFT_T(KC_SPC),  KC_BSPC, KC_LALT, KC_NO,   KC_PGDN, MO(_SS), RSFT_T(KC_SPC),  KC_GESC,  KC_HOME, KC_END, KC_ENT
   ),
 
 /* SECONDARY & SYMBOL
  * .--------------------------------------------------------------------------------------------------------------------------------------.
- * | !      | @      | #      | $      | %      |        |        |        |        |        | ^      | &      | *      | -   _  | =   +  |
+ * | `      | ~      |        |        |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | ~      |        |        | (   )  | ENTER  | NUM LK |        |        |        |        | BSPC   | {   }  | [   ]  |        | '      |
+ * | !      | @      | #      | $      | %      |        |        |        |        |        | ^      | &      | *      | (      | )      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |        |        |        | \      |
+ * | =      | _      | +      | -      | \      |        |        |        |        |        | {      | }      | [      | ]      | '      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        | |      |        |        |        |        |        |        |        | <      | >      | "      |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
- * |        |        |        |        |        |        | SS     |        | SS     |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
   [_SS] = LAYOUT_ortho_5x15( /* SECONDARY & SYMBOL */
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, KC_6,    KC_7,    KC_8,    TD(MINSS),TD(EQLS),
-    KC_TAB,  _______, _______, TD(PRNS),KC_ENT,  KC_NLCK, _______, _______, _______, _______, KC_BSPC, TD(CBRS),TD(BRCS),_______,  TD(QUOTS),
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  TD(BSLS_PP),
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,
-    _______, _______, _______, _______, _______, _______, MO(_SS), KC_TILD, MO(_SS), _______, _______, _______, _______, _______,  _______
+    KC_GRV,  S(KC_GRV),_______, _______, _______,    _______, _______, _______, _______, _______, _______,   _______,   _______, _______,  _______,
+    S(KC_1), S(KC_2),  S(KC_3), S(KC_4), S(KC_5),    _______, _______, _______, _______, _______, S(KC_6),   S(KC_7),   S(KC_8), S(KC_9),  S(KC_0),
+    KC_EQL, S(KC_MINS),  KC_PPLS, KC_PMNS, KC_BSLS,    _______, _______, _______, _______, _______, S(KC_LBRC),S(KC_RBRC),KC_LBRC, KC_RBRC,  KC_QUOT,
+    _______, _______,  _______, _______, S(KC_BSLS), _______, _______, _______, _______, _______, _______,   _______,   S(KC_COMM), S(KC_DOT),S(KC_QUOT),
+    _______, _______,  _______, _______, _______,    _______, _______, _______, _______, _______, _______,   _______,   _______, _______,  _______
   ),
 
 /* FUNCTION
  * .--------------------------------------------------------------------------------------------------------------------------------------.
- * | F9     | F10    | F11    | F12    |        |        |        |        |        |        |        | 7      | 8      | 9      |        |
+ * | F1     | F2     | F3     | F4     | F5     | F6     | F7     | F8     | F9     | F10    | F11    | F12    |        |        |        |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | F5     | F6     | F7     | F8     |        |        |        |        |        |        |        | 4      | 5      | 6      | 0      |
+ * |        |        |        |        |        |        |        |        |        |        |        | P7     | P8     | P9     |        |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | F1     | F2     | F3     | F4     |        |        |        |        |        |        |        | 1      | 2      | 3      |        |
+ * |        |        |        |        |        |        |        |        |        |        |        | P4     | P5     | P6     | P0     |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        | VOLUP  |        |        |        |
+ * |        |        |        |        |        |        |        | RESET  |        |        |        | P1     | P2     | P3     |        |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
- * |        |        |        |        |        |        |        | SLEEP  |        |        |        | VOLDN  |        |        |        |
+ * |        |        |        |        |        | _NL    |        | SLEEP  |        |        |        | VOLDN  |        |        |        |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
-  [_FN] = LAYOUT_ortho_5x15( /* FUNCTION */
-    KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, _______, _______, _______, _______, KC_7,    KC_8,    KC_9,    _______,
-    KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______, _______, _______, _______, _______, _______, _______, KC_4,    KC_5,    KC_6,    KC_0,
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, _______, _______, _______, _______, _______, _______, KC_1,    KC_2,    KC_3,    _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, K_VOLU,  _______, _______, _______,
-    _______, _______, MO(_FN), _______, _______, _______, _______, KC_SLEP, _______, _______, _______, K_VOLD,  _______, _______, _______
+  [_NL] = LAYOUT_ortho_5x15( /* FUNCTION */
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_7,    KC_8,    KC_9,    _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_4,    KC_5,    KC_6,    KC_0,
+    _______, _______, _______, _______, _______, _______, _______, RESET,   _______, _______, _______, KC_1,    KC_2,    KC_3,    _______,
+    _______, _______, _______, _______, _______, MO(_NL), _______, KC_SLEP, _______, _______, _______, _______, _______, _______, _______
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case DBLOH:
-      if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("00");
-      } else {
-        // when keycode QMKBEST is released
-      }
-      break;
-    case COPY:
-      if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
-      }
-      break;
-          case PASTE:
-      if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
-      }
-      break;
-    case SLALL:
-      if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
-      }
-      break;
-  }
+  // switch (keycode) {
+  //   case DBLOH:
+  //     if (record->event.pressed) {
+  //       // when keycode QMKBEST is pressed
+  //       SEND_STRING("00");
+  //     } else {
+  //       // when keycode QMKBEST is released
+  //     }
+  //     break;
+  // }
   return true;
 }
 
@@ -155,9 +123,22 @@ void led_set_user(uint8_t usb_led) {
 
 }
 
-//Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for Esc, twice for Caps Lock
-  [SS_FN]  = ACTION_TAP_DANCE_DOUBLE(MO(_SS), MO(_SS))
-// Other declarations would go here, separated by commas, if you have them
+enum combos {
+  IO_ENT,
+  AR_TAB
 };
+
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM ar_combo[] = {KC_A, KC_R, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [IO_ENT] = COMBO(ab_combo, KC_ENT),
+  [AR_TAB] = COMBO(ar_combo, KC_TAB)
+};
+
+// //Tap Dance Definitions
+// qk_tap_dance_action_t tap_dance_actions[] = {
+//   //Tap once for Esc, twice for Caps Lock
+//   [QUOTS]  = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, LSFT(KC_QUOT))
+// // Other declarations would go here, separated by commas, if you have them
+// };
