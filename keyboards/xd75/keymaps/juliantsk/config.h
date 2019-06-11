@@ -18,6 +18,7 @@
 
 // place overrides here
 #include QMK_KEYBOARD_CONFIG_H
-#define TAPPING_TERM 150
+#define TAPPING_TERM 120
 #define PERMISSIVE_HOLD
 #define COMBO_COUNT 2
+#define COMBO_TERM 75
