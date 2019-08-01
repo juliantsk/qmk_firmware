@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
   [_SS] = LAYOUT_ortho_5x15( /* SECONDARY & SYMBOL */
-    KC_GRV, S(KC_GRV), _______, _______, _______,   _______, _______, _______, _______, _______, _______,   _______,   _______,   _______,  _______,
+    KC_GRV, S(KC_GRV), _______, _______, _______,   _______, KC_CAPS, KC_NLCK, KC_SLCK, _______, _______,   _______,   _______,   _______,  _______,
     S(KC_1),S(KC_2),   S(KC_3), S(KC_4), S(KC_5),   _______, _______, _______, _______, _______, S(KC_6),   S(KC_7),   S(KC_8),   S(KC_9),  S(KC_0),
     KC_EQL, S(KC_MINS),KC_PPLS, KC_PMNS, KC_BSLS,   _______, _______, _______, _______, _______, S(KC_LBRC),S(KC_RBRC),KC_LBRC,   KC_RBRC,  KC_QUOT,
     _______,_______,   _______, _______, S(KC_BSLS),_______, _______, _______, _______, _______, _______,   _______,   S(KC_COMM),S(KC_DOT),S(KC_QUOT),
@@ -121,18 +121,18 @@ void led_set_user(uint8_t usb_led) {
 
 }
 
-enum combos {
-  IO_ENT,
-  AR_TAB
-};
+//enum combos {
+  //IO_ENT,
+  //AR_TAB
+//};
 
-const uint16_t PROGMEM io_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM ar_combo[] = {KC_Z, KC_X, COMBO_END};
+//const uint16_t PROGMEM io_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+//const uint16_t PROGMEM ar_combo[] = {KC_Z, KC_X, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-  [IO_ENT] = COMBO(io_combo, KC_ENT),
-  [AR_TAB] = COMBO(ar_combo, KC_TAB)
-};
+//combo_t key_combos[COMBO_COUNT] = {
+  //[IO_ENT] = COMBO(io_combo, KC_ENT),
+  //[AR_TAB] = COMBO(ar_combo, KC_TAB)
+//};
 
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
